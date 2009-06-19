@@ -6,7 +6,7 @@ FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use 
 
 Initialization:
 
-  FreshBooks.setup('sample.freshbooks.com', 'mytoken')
+  FreshBooks::Base.establish_connection( 'sample.freshbooks.com', 'mytoken' )
 
 Updating a client name:
 

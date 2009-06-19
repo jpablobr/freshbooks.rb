@@ -26,7 +26,11 @@ module FreshBooks
     
     def call_api(method, elements = [])
       request = create_request(method, elements)
+      #puts request
+      self.logger.debug request
       result = post(request)
+      #puts result
+      self.logger.debug result
       Response.new(result)
     end
     
@@ -38,6 +42,8 @@ module FreshBooks
       request.attributes['method'] = method
       
       elements.each do |element|
+        #puts "Element: " + element.class.inspect
+        #puts "  - " + element.inspect
         if element.kind_of?(Hash)
           element = element.to_a
         end
@@ -45,8 +51,12 @@ module FreshBooks
         value = element.last
         
         if value.kind_of?(Base)
-          request.add_element(value.to_xml)
+          #puts "We thinks this is a kind of base. This is the value to_xml: " + value.to_xml
+          request << REXML::Document.new(value.to_xml)
+          # request.add_text(REXML::Text.new( value.to_xml, false, nil, false ))
         else
+          #puts "We ain't thinkin this is a kind of base. This is the key to_xml: " + key.to_s
+          #puts "This is the value to_xml: " + value.to_s
           request.add_element(REXML::Element.new(key.to_s)).text = value.to_s
         end
       end
