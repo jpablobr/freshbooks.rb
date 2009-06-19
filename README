@@ -4,6 +4,9 @@ FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use 
 
 = Examples
 
+Installation:
+  gem install elc-freshbooks.rb --version 3.0.2 --source http://gems.github.com
+
 Initialization:
 
   FreshBooks::Base.establish_connection( 'sample.freshbooks.com', 'mytoken' )
