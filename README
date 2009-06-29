@@ -1,6 +1,7 @@
 = About
 
-FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account.
+FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account. Read more on ELC's blog:
+http://elctech.com/tags/freshbooks
 
 = Examples
 
@@ -29,6 +30,22 @@ Creating a new item
   item = FreshBooks::Item.new
   item.name = 'A sample item'
   item.create
+
+Getting an invoice pdf:
+
+  invoice = FreshBooks::Invoice.get(4)
+  original_status = invoice.status
+  invoice.status = "sent"
+  raise "API Change or error" unless invoice.update
+  html_url = invoice.client_view
+  cookiejar = Tempfile.new("cookies")
+  pdf_file = Tempfile.new("pdf")
+  html_doc = `wget "#{html_url}"  --no-check-certificate --cookies=on --keep-session-cookies --save-cookies='#{cookiejar.path}'  -O -`
+  `wget 'https://#{freshbooks_api_host}/getPDF.php' --post-data='invoice_id[]=#{invoice.number}' --cookies=on --keep-session-cookies 
+    --load-cookies='#{cookiejar.path}'  --no-check-certificate -O '#{pdf_file.path}'"`
+  invoice.status = original_status
+  raise "API Change or error" unless invoice.update
+  pdf_file.path # Here's the PDF!
 
 = License
 
