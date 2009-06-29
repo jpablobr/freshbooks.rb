@@ -26,10 +26,10 @@ module FreshBooks
     
     def call_api(method, elements = [])
       request = create_request(method, elements)
-      #puts request
+      # puts request
       self.logger.debug request
       result = post(request)
-      #puts result
+      # puts result
       self.logger.debug result
       Response.new(result)
     end
