@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{freshbooks.rb}
-  s.version = "3.0.3"
+  s.version = "3.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jonathan Siegel"]
+  s.authors = ["Jonathan Siegel, David Palm"]
   s.date = %q{2009-06-12}
   s.description = %q{}
   s.email = ["info@elctech.com"]
