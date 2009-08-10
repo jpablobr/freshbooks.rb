@@ -25,11 +25,12 @@ module FreshBooks
     end
     
     def call_api(method, elements = [])
+      # puts "#{self.class}#call_api: Creating a request with method: #{method} and elements: #{elements.inspect}"
       request = create_request(method, elements)
-      # puts request
+      # puts "#{self.class}#call_api: Sending request \"#{request}\""
       self.logger.debug request
       result = post(request)
-      # puts result
+      # puts "#{self.class}#call_api: Received: \"#{result}\""
       self.logger.debug result
       Response.new(result)
     end
@@ -42,8 +43,8 @@ module FreshBooks
       request.attributes['method'] = method
       
       elements.each do |element|
-        #puts "Element: " + element.class.inspect
-        #puts "  - " + element.inspect
+        # puts "Element: " + element.class.inspect
+        # puts "  - " + element.inspect
         if element.kind_of?(Hash)
           element = element.to_a
         end

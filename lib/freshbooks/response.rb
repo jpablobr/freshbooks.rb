@@ -1,8 +1,10 @@
 module FreshBooks
   class Response
     attr_accessor :doc
+    attr_reader   :raw_response
     
     def initialize(xml_raw)
+      @raw_response = xml_raw
       @doc = REXML::Document.new(xml_raw)
     end
     

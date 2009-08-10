@@ -94,7 +94,7 @@ module FreshBooks
         case method_name
         when "list"
           define_class_method(method_name) do |*args|
-            args << {} if args.empty? # first param is optional and default to empty hash
+            args << HashWithIndifferentAccess.new if args.empty? # first param is optional and default to empty hash
             api_list_action(api_action_name, *args)
           end
         when "get"
@@ -118,11 +118,12 @@ module FreshBooks
     end
     
     def self.api_list_action(action_name, options = {})
+      options = HashWithIndifferentAccess.new(options) # NOTE: this is needed so that :page => 10 doesn't end up twice in the options hash (dvd, 10-08-2009)
       # Create the proc for the list proxy to retrieve the next page
       list_page_proc = proc do |page|
         options["page"] = page
         response = FreshBooks::Base.connection.call_api("#{api_class_name}.#{action_name}", options)
-        raise FreshBooks::InternalError.new("Response was not successful. This should never happen.") unless response.success?
+        raise FreshBooks::InternalError.new("Response was not successful. Error: #{response.error_msg}") unless response.success?
         
         root = response.elements[1]
         array = root.elements.map { |item| self.new_from_xml(item) }
