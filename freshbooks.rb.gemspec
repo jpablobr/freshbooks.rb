@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{freshbooks.rb}
-  s.version = "3.0.6"
+  s.version = "3.0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jonathan Siegel, David Palm"]
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{freshbooks.rb}
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{}
+  s.summary = %q{Freshbooks integration for Ruby}
   s.test_files = ["test/schema/test_definition.rb", "test/schema/test_mixin.rb", "test/test_base.rb", "test/test_connection.rb", "test/test_helper.rb", "test/test_invoice.rb", "test/test_list_proxy.rb", "test/test_page.rb"]
 
   if s.respond_to? :specification_version then
