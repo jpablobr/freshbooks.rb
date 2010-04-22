@@ -1,1 +1,5 @@
+.DS_Store
+tmp
+pkg
+*.gem
 test/live_test.rb

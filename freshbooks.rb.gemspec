@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{freshbooks.rb}
+  s.name = %q{jpablobr-freshbooks.rb}
   s.version = "3.0.6.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jose Pablo Barrantes"]
-  s.date = %q{2010-22-04}
+  s.author = "Jose Pablo Barrantes"
+  s.date = %q{2009-06-12}
   s.description = %q{}
   s.email = ["xjpablobrx@gmail.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt"]
   s.files = ["History.txt", "LICENSE", "Manifest.txt", "README", "Rakefile", "lib/freshbooks.rb", "lib/freshbooks/base.rb", "lib/freshbooks/category.rb", "lib/freshbooks/client.rb", "lib/freshbooks/connection.rb", "lib/freshbooks/estimate.rb", "lib/freshbooks/expense.rb", "lib/freshbooks/invoice.rb", "lib/freshbooks/item.rb", "lib/freshbooks/line.rb", "lib/freshbooks/links.rb", "lib/freshbooks/list_proxy.rb", "lib/freshbooks/payment.rb", "lib/freshbooks/project.rb", "lib/freshbooks/recurring.rb", "lib/freshbooks/response.rb", "lib/freshbooks/schema/definition.rb", "lib/freshbooks/schema/mixin.rb", "lib/freshbooks/staff.rb", "lib/freshbooks/task.rb", "lib/freshbooks/time_entry.rb", "lib/freshbooks/xml_serializer.rb", "lib/freshbooks/xml_serializer/serializers.rb", "script/console", "script/destroy", "script/generate", "test/fixtures/invoice_create_response.xml", "test/fixtures/invoice_get_response.xml", "test/fixtures/invoice_list_response.xml", "test/fixtures/success_response.xml", "test/mock_connection.rb", "test/schema/test_definition.rb", "test/schema/test_mixin.rb", "test/test_base.rb", "test/test_connection.rb", "test/test_helper.rb", "test/test_invoice.rb", "test/test_list_proxy.rb", "test/test_page.rb"]
   s.has_rdoc = true
-  s.homepage = %q{FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account.}
+  s.homepage = "http://github.com/jpablobr/freshbooks.rb"
   s.rdoc_options = ["--main", "README"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{freshbooks.rb}
