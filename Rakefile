@@ -1,26 +1,19 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/freshbooks'
-require 'hoe'
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('freshbooks.rb', FreshBooks::VERSION) do |p|
-  p.developer('Ben Curren', 'ben@outright.com')
-  p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.rubyforge_name       = p.name # TODO this is default value
-  p.extra_deps         = ['activesupport']
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"],
-    ['mocha', ">= 0.9.4"]
-  ]
-  
-  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-  p.rsync_args = '-av --delete --ignore-errors'
+require 'rubygems'
+require 'rake'
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name = "jpablobr-freshbooks"
+    gemspec.summary = "jpablobr-freshBooks is a Ruby interface to the FreshBooks API."
+    gemspec.description = "jpablobr-freshBooks is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account."
+    gemspec.email = "xjpablobrx@gmail.com"
+    gemspec.homepage = "http://github.com/jpablobr/freshbooks.rb"
+    gemspec.authors = ["Jose Pablo Barrantes"]
+  end
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gemcutter.org"
 end
 
-require 'newgem/tasks' # load /tasks/*.rake
-Dir['tasks/**/*.rake'].each { |t| load t }
-
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
