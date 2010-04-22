@@ -10,7 +10,7 @@ module FreshBooks
       s.array :lines
       s.object :links, :read_only => true
       s.string :number, :organization, :status, :notes, :terms, :first_name, :last_name
-      s.string :p_street1, :p_street2, :p_city, :p_state, :p_country, :p_code, :currency_code
+      s.string :p_street1, :p_street2, :p_city, :p_state, :p_country, :p_code, :currency_code, :return_uri
     end
     def name
       "#{self.first_name} #{self.last_name}"
