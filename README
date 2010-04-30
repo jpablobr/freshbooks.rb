@@ -1,16 +1,67 @@
 = About
 
-FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account. Read more on ELC's blog:
-http://elctech.com/tags/freshbooks
+FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account.
 
 = Examples
 
 Installation:
-  gem install elc-freshbooks.rb --source http://gems.github.com
+  gem install jpablobr-freshbooks.rb
 
 Initialization:
 
   FreshBooks::Base.establish_connection( 'sample.freshbooks.com', 'mytoken' )
+
+Creating a client:
+
+  def new_client
+    client = FreshBooks::Client.new
+    @user = User.find(params[:user])
+    client.first_name = @user.first_name.nil? @user.first_name : 'first_name'
+    client.last_name = @user.last_name.nil? ? @user.last_name : 'last_name'
+    client.organization = @user.company.nil? ? @user.company : 'company'
+    client.email = @user.email.nil? ? @user.email.nil? : 'email'
+    client.create
+
+    unless (client.client_id.nil?)      
+      flash[:notice] = "Client with id ##{client.client_id} added to freshbooks successfully"
+      @user.update_attributes!(:fb_client_id => client.client_id)
+      redirect_to client_path(@user)      
+    else
+      flash[:notice] = "There was an error!"      
+    end
+  end
+
+Send an Invoice:
+
+  def send_invoice
+    @product = Product.find(params[:product])
+    @user = User.find(params[:user])
+    @client = FreshBooks::Client.get(@user.fb_client_id)
+
+    invoice = FreshBooks::Invoice.new
+    invoice.client_id = 0
+    invoice.discount = 0
+    invoice.notes = ""
+    invoice.currency_code = ""
+    invoice.terms = ""
+    invoice.lines = []
+
+    @product.items.each do |item|
+      line = FreshBooks::Line.new
+      line.name = ""
+      line.description = ""
+      line.unit_cost = 0
+      line.quantity = 0
+      line.tax1_name = ""
+      line.tax1_percent = 0
+      invoice.lines << line
+    end
+    
+    invoice.create
+    invoice.send_by_email
+    flash[:notice] = "Invoice has been sent and emailed to customer successfully"
+    redirect_to client_path(@user)
+  end
 
 Updating a client name:
 
@@ -60,6 +111,8 @@ FreshBooks.rb is distributed as a gem via Rubyforge. The easiest way to install 
 Alternatively, you can download it from the Rubyforge project page.
 
 = Credits
+
+[elc](http://elctech.com/tags/freshbooks ) 
 
 FreshBooks.rb is written and maintained by Ben Vinegar, with contributions from Flinn Meuller, Kenneth Kalmer, and others. 
 
