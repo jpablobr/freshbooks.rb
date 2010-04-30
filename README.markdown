@@ -3,16 +3,16 @@ About
 
 FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account.
 
-## Examples ##
-
 ## Installation: ##
 `  gem install jpablobr-freshbooks.rb`
 
-## Initialization: ##
+## Examples ##
+
+### Initialization: ###
 
 `  FreshBooks::Base.establish_connection( 'sample.freshbooks.com', 'mytoken' )`
 
-## Creating a client: ##
+### Creating a client: ###
 
       def new_client
         client = FreshBooks::Client.new
@@ -32,7 +32,7 @@ FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use 
         end
       end
 
-## Send an Invoice: ##
+### Send an Invoice: ###
 
       def send_invoice
         @product = Product.find(params[:product])
@@ -64,26 +64,26 @@ FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use 
         redirect_to client_path(@user)
       end
 
-## Updating a client name: ##
+### Updating a client name: ###
 
       clients = FreshBooks::Client.list
       client = clients[0]
       client.first_name = 'Suzy'
       client.update
 
-## Updating an invoice: ##
+### Updating an invoice: ###
 
       invoice = FreshBooks::Invoice.get(4)
       invoice.lines[0].quantity += 1
       invoice.update
 
-## Creating a new item ##
+### Creating a new item ###
 
       item = FreshBooks::Item.new
       item.name = 'A sample item'
       item.create
 
-## Getting an invoice pdf: ##
+### Getting an invoice pdf: ###
 
       invoice = FreshBooks::Invoice.get(4)
       original_status = invoice.status
@@ -99,11 +99,11 @@ FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use 
       raise "API Change or error" unless invoice.update
       pdf_file.path # Here's the PDF
 
-## License ##
+### License ###
 
 This work is distributed under the MIT License. Use/modify the code however you like.
 
-## Download ##
+### Download ###
 
 FreshBooks.rb is distributed as a gem via Rubyforge. The easiest way to install it is like so:
 
@@ -111,7 +111,7 @@ FreshBooks.rb is distributed as a gem via Rubyforge. The easiest way to install 
 
 Alternatively, you can download it from the Rubyforge project page.
 
-## Credits ##
+### Credits ###
 
 [elc](http://elctech.com/tags/freshbooks ) 
 
