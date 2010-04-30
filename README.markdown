@@ -1,19 +1,21 @@
-= About
+About
+=====
+
 
 FreshBooks.rb is a Ruby interface to the FreshBooks API. It exposes easy-to-use classes and methods for interacting with your FreshBooks account.
 
-= Examples
+## Examples ##
 
-Installation:
+## Installation: ##
   gem install jpablobr-freshbooks.rb
 
-Initialization:
+## Initialization: ##
 
   FreshBooks::Base.establish_connection( 'sample.freshbooks.com', 'mytoken' )
 
-Creating a client:
+## Creating a client: ##
 
-  def new_client
+`  def new_client
     client = FreshBooks::Client.new
     @user = User.find(params[:user])
     client.first_name = @user.first_name.nil? @user.first_name : 'first_name'
@@ -29,11 +31,11 @@ Creating a client:
     else
       flash[:notice] = "There was an error!"      
     end
-  end
+  end`
 
-Send an Invoice:
+## Send an Invoice: ##
 
-  def send_invoice
+`  def send_invoice
     @product = Product.find(params[:product])
     @user = User.find(params[:user])
     @client = FreshBooks::Client.get(@user.fb_client_id)
@@ -61,30 +63,30 @@ Send an Invoice:
     invoice.send_by_email
     flash[:notice] = "Invoice has been sent and emailed to customer successfully"
     redirect_to client_path(@user)
-  end
+  end`
 
-Updating a client name:
+## Updating a client name: ##
 
-  clients = FreshBooks::Client.list
+`  clients = FreshBooks::Client.list
   client = clients[0]
   client.first_name = 'Suzy'
-  client.update
+  client.updat`e
 
-Updating an invoice:
+## Updating an invoice: ##
 
-  invoice = FreshBooks::Invoice.get(4)
+`  invoice = FreshBooks::Invoice.get(4)
   invoice.lines[0].quantity += 1
-  invoice.update
+  invoice.update`
 
-Creating a new item
+## Creating a new item ##
 
-  item = FreshBooks::Item.new
+`  item = FreshBooks::Item.new
   item.name = 'A sample item'
-  item.create
+  item.create`
 
-Getting an invoice pdf:
+## Getting an invoice pdf: ##
 
-  invoice = FreshBooks::Invoice.get(4)
+`  invoice = FreshBooks::Invoice.get(4)
   original_status = invoice.status
   invoice.status = "sent"
   raise "API Change or error" unless invoice.update
@@ -96,23 +98,22 @@ Getting an invoice pdf:
     --load-cookies='#{cookiejar.path}'  --no-check-certificate -O '#{pdf_file.path}'"`
   invoice.status = original_status
   raise "API Change or error" unless invoice.update
-  pdf_file.path # Here's the PDF!
+  pdf_file.path # Here's the PDF!`
 
-= License
+## License ##
 
 This work is distributed under the MIT License. Use/modify the code however you like.
 
-= Download
+## Download ##
 
 FreshBooks.rb is distributed as a gem via Rubyforge. The easiest way to install it is like so:
 
-  gem install freshbooks
+  `gem install freshbooks`
 
 Alternatively, you can download it from the Rubyforge project page.
 
-= Credits
+## Credits ##
 
 [elc](http://elctech.com/tags/freshbooks ) 
 
-FreshBooks.rb is written and maintained by Ben Vinegar, with contributions from Flinn Meuller, Kenneth Kalmer, and others. 
-
+FreshBooks.rb is written and maintained by Ben Vinegar, with contributions from Flinn Meuller, Kenneth Kalmer, and others.
